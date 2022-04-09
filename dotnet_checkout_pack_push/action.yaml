@@ -11,6 +11,10 @@ inputs:
     required: false
     default: '.'
 
+  nuget-api-url:
+    required: false
+    default: 'https://api.nuget.org/v3/index.json'
+
   nuget-api-key:
     required: true
 
@@ -30,4 +34,4 @@ runs:
 
     - name: push
       shell: bash
-      run: find . -iname *.nupkg -exec dotnet nuget push {} --api-key ${{ inputs.nuget-api-key }} \;
+      run: find . -iname *.nupkg -exec dotnet nuget push {} --source ${{ inputs.nuget-api-key }} --api-key ${{ inputs.nuget-api-key }} \;
