@@ -30,7 +30,7 @@ runs:
 
     - name: pack
       shell: bash
-      run: dotnet pack ${{ inputs.project-path }} -c Release -p:ContinuousIntegrationBuild=true --verbosity normal
+      run: dotnet pack ${{ inputs.project-path }} -c Release -p:ContinuousIntegrationBuild=true
 
     - name: push
       shell: bash
