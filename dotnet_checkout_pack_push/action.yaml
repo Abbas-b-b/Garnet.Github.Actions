@@ -21,10 +21,10 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Setup dotnet
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v2
       with:
         dotnet-version: ${{ inputs.dotnet-version }}
 
@@ -34,4 +34,4 @@ runs:
 
     - name: push
       shell: bash
-      run: find . -iname *.nupkg -exec dotnet nuget push {} --source ${{ inputs.nuget-api-url }} --api-key ${{ inputs.nuget-api-key }} \;
+      run: set -e && shopt -s globstar && for f in  **/*.nupkg; do dotnet nuget push $f --source ${{ inputs.nuget-api-url }} --api-key ${{ inputs.nuget-api-key }}; done
